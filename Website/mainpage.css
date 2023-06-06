@@ -1,0 +1,250 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --color-primary:#FFD4D4;
+    --tab-width: 300px;
+    --button-width: 64px;
+  }
+  
+  html,
+  body,
+  .wrapper {
+    height: 100%;
+  }
+  
+  @keyframes gradient {
+      100% {
+        background-size: 4000px 1000px;
+      }
+  }
+  
+  body {
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 0;
+    background-image: url("Wave.svg");
+    background-size: 2000px 1000px;
+    background-position: -500px 0;
+    color: #000000;
+    font-family: "Euclid Circular A";
+    animation: gradient 10s infinite alternate linear;
+  }
+  
+  .widget {
+    background: #FFF2EE;
+    width: calc(var(--tab-width) * 1.4); /* Increase width by 40% (20% on each side) */
+    height: calc(var(--tab-width) * 2.0); /* Increase height by 60% */
+    border-radius: 8px;
+    border: 3px solid #e2a6a6;
+    margin: 0 auto; /* Center the widget */
+    margin-top: calc(50vh - var(--tab-width)); /* Adjust margin-top to center the widget */
+  }
+  
+  input {
+    display: none;
+  }
+  
+  h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: 400;
+  }
+  
+  .content {
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+  }
+  
+  .content-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    width: calc(var(--tab-width) * 4);
+    transition: 0.3s;
+  }
+  
+  .content-inner > div {
+    width: inherit;
+    padding: 20px;
+  }
+  
+  label {
+    padding: 20px;
+    font-size: 15px;
+    width: var(--button-width);
+    opacity: 0.35;
+    cursor: pointer;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #888889;
+  }
+  
+  .buttons {
+    position: relative;
+    display: flex;
+    border-bottom: 1px solid #575757;
+  }
+  
+  .underline {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 64px;
+    height: 3px;
+    background: var(--color-primary);
+    transition: 0.2s;
+  }
+
+  .diary-image {
+    width: 100px; /* 이미지의 너비를 80px로 조정 */
+    height: 100px; /* 이미지의 높이를 80px로 조정 */
+    object-fit: cover;
+    margin-left: -30px;
+  }
+  
+  .diary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .diary-button {
+    width: 60px;
+    height: 30px;
+    margin-top: 10px;
+    background-color: #FFD4D4;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 150px;
+  }
+
+  .diary-button:hover {
+    background-color: #FFBABA;
+  }
+  
+  .diary-textarea {
+    width: calc(var(--tab-width) * 1.32 - 20px); /* 가로 길이를 늘리기 위해 -40px에서 -20px로 수정 */
+    height: 80px;
+    margin-top: 10px;
+    padding: 10px;
+    resize: none;
+    border: 1px solid #888889;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .tab-content#tab-content-2 {
+    margin-top: -100px;
+    display: block;
+  }
+  .profile {
+    text-align: center;
+  }
+  .profile-picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 50px;
+    margin-left: -15px;
+    margin-bottom: 10px;
+  }
+  .profile h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .profile p {
+    margin-bottom: 5px;
+  }
+
+  .tab-content#tab-content-3 {
+    display: block;
+  }
+  
+  .settings {
+    text-align: center;
+  }
+  
+  .settings-button {
+
+    display: block;
+    margin-bottom: 20px;
+    padding: 15px 30px;
+    background-color: #ffdede;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    width: 100%; /* 버튼을 영역에 꽉 채우도록 설정 */
+  }
+  
+  .settings-button:hover {
+    background-color: #eb8989;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .settings-button:last-child {
+    margin-bottom: 0;
+  }
+
+  .profile-picture1 {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+
+    margin-top: -50px;
+    margin-bottom: 10px;
+  }
+  
+  .tab-content:nth-child(3) .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  
+  .tabs input:nth-child(1):checked ~ .buttons .underline {
+    translate: 0 0;
+  }
+  
+  .tabs input:nth-child(2):checked ~ .buttons .underline {
+    translate: var(--button-width) 0;
+  }
+  
+  .tabs input:nth-child(3):checked ~ .buttons .underline {
+    translate: calc(var(--button-width) * 2) 0;
+  }
+  
+  .tabs input:nth-child(1):checked ~ .buttons label:nth-child(1),
+  .tabs input:nth-child(2):checked ~ .buttons label:nth-child(2),
+  .tabs input:nth-child(3):checked ~ .buttons label:nth-child(3) {
+    opacity: 1;
+  }
+  
+  .tabs input:nth-child(1):checked ~ .content > .content-inner {
+    translate: 0 0;
+  }
+  
+  .tabs input:nth-child(2):checked ~ .content > .content-inner {
+    translate: calc(0px - var(--tab-width) * 1.33) 0;
+  }
+  
+  .tabs input:nth-child(3):checked ~ .content > .content-inner {
+    translate: calc(0px - var(--tab-width) * 2.67) 0;
+  }
+  

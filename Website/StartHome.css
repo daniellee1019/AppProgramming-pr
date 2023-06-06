@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  html,
+  body,
+  .wrapper {
+    height: 100%;
+  }
+  
+  @keyframes gradient {
+    100% {
+      background-size: 4000px 1000px;
+    }
+  }
+  
+  body {
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 0 16px; /* 모바일 화면에서만 적용되도록 수정됨 */
+    background-image: url("Wave.svg");
+    background-size: 2000px 1000px;
+    background-position: -500px 0;
+    color: #000000;
+    font-family: "Euclid Circular A";
+    animation: gradient 10s infinite alternate linear;
+  }
+  
+  @media screen and (min-width: 500px) {
+    body {
+      padding: 0;
+    }
+  }
+  
+  .frame {
+    margin: 10px;
+    padding: 0 3% 0 3%;
+    border: 10px solid #f9f9f9;
+    border-style: solid;
+    border-radius: 50px;
+    box-shadow: 0 0 0 5px #000000;
+    display: grid;
+    place-items: center;
+    height: calc(100% - 40px);
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 767px) {
+    .frame {
+      margin-top: 80px;
+    }
+  }
+  
+  .frame::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 5px solid #000000;
+    border-radius: 40px;
+  }
+  
+  .frame > img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  .text {
+    font-family: "Euclid Circular A";
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative; /* 부모 요소를 기준으로 자식 요소를 배치하기 위해 position 속성을 추가합니다. */
+     /* 요소를 위로 20px 이동시킵니다. */
+    top: -50px;
+    transform: translateY(-50%)
+  }
+  @media (max-width: 767px) {
+    .text {
+      margin-bottom: 20px;
+      top: auto;
+      transform: none;
+    }
+  }
+  
+  .button {
+    box-sizing: border-box;
+    display: block;
+    margin: 20px auto;
+    padding: 10px 50px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 0 5px #7F7F7F;
+    background-color: #FFFFFF;
+    color: #7F7F7F    ;
+    cursor: pointer;
+    position: relative; /* 부모 요소를 기준으로 자식 요소를 배치하기 위해 position 속성을 추가합니다. */
+    top: 30px; /* 요소를 위로 20px 이동시킵니다. */
+    transform: translateY(-50%)
+  }
+  @media (max-width: 767px) {
+    .button {
+      margin-bottom: 20px;
+      top: auto;
+      transform: none;
+    }
+  }
+  

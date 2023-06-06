@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="Signup.css" />
+
+    <style>
+      .error {
+        color: red;
+      }
+
+      .success {
+        color: green;
+      }
+      .error-message {
+            color: red;
+            font-weight: bold;
+      }
+    </style>
+
+</head>
+<body>
+    <div class="login-card">
+      <img src="welsh01.png" />
+      <h2>회원가입</h2>
+      <h3>사용하실 이메일과 비밀번호를 작성해주세요.</h3>
+      <form class="login-form" method="POST" action="signup.php">
+        <div class="username">
+          <input
+            autocomplete="off"
+            spellcheck="false"
+            class="control"
+            type="text"
+            placeholder="Username"
+            id="username"
+            name="username"
+            required
+          />
+          <span id="username-feedback"></span> 
+        </div>
+        <div class="username">
+          <input
+            autocomplete="off"
+            spellcheck="false"
+            class="control"
+            type="email"
+            placeholder="Email"
+            name="email"
+            id="email"
+            onkeyup="validateEmail()"
+            required
+          />
+          <div id="spinner" class="spinner"></div>
+          <span class="checkmark">&#10004;</span>
+          <span id="email-feedback"></span>
+        </div>
+        <input
+          spellcheck="false"
+          class="control"
+          id="password"
+          type="password"
+          placeholder="Password"
+          name="password"
+          onkeyup="handleChange()"
+          required
+        />
+        <div id="bars">
+          <div></div>
+        </div>
+        <div class="strength" id="strength"></div>
+        <button class="control" type="submit">완료</button>
+      </form>
+    </div>
+    <script type="text/javascript" src="Signup.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#username').on('input', function() {
+          var username = $(this).val();
+          checkUsernameAvailability(username);
+        });
+
+        $('#email').on('input', function() {
+          var email = $(this).val();
+          checkEmailAvailability(email);
+        });
+
+        function checkUsernameAvailability(username) {
+          if (username === '') {
+            $('#username-feedback').text('');
+            return;
+          }
+
+          $.ajax({
+            type: 'POST',
+            url: 'check_username.php',
+            data: { username: username },
+            success: function(response) {
+              if (response === 'duplicate') {
+                $('#username-feedback').text('중복된 사용자명입니다. 다른 사용자명을 입력해주세요.').removeClass('success').addClass('error');
+              } else if (response === 'available') {
+                $('#username-feedback').text('사용 가능한 사용자명입니다.').removeClass('error').addClass('success');
+              } else {
+                $('#username-feedback').text('');
+              }
+            }
+          });
+        }
+
+        function checkEmailAvailability(email) {
+          if (email === '') {
+            $('#email-feedback').text('');
+            return;
+          }
+
+          $.ajax({
+            type: 'POST',
+            url: 'check_email.php',
+            data: { email: email },
+            success: function(response) {
+              if (response === 'duplicate') {
+                $('#email-feedback').text('중복된 이메일입니다. 다른 이메일을 입력해주세요.').removeClass('success').addClass('error');
+              } else if (response === 'available') {
+                $('#email-feedback').text('사용 가능한 이메일입니다.').removeClass('error').addClass('success');
+              } else {
+                $('#email-feedback').text('');
+              }
+            }
+          });
+        }
+      });
+    </script>
+</body>
+</html>

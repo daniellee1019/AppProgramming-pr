@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar 13</title>
+    <link rel="stylesheet" href="css/chat.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav>
+      <a href ="mainpage.html">
+        <img src="images/welsh01rm.png"/>
+      </a>
+    </nav>
+    <div class="overlay"></div>
+    <button class="burger" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+      <i class="fa-solid fa-close"></i>
+    </button>
+    <aside>
+      <a href="mainpage.html">Home</a>
+      <a href="mainpage.html">Mypage</a>
+      <a href="https://github.com/daniellee1019">github</a>
+      <h3>Product</h3>
+      <a>Why MyPetDiary?</a>
+      <a>Features</a>
+      <a>Releases</a>
+      <a>Roadmap</a>
+      <a>Documentation</a>
+      <button class="settings-bu" onclick="gotoLOGOUT()">LOGOUT</button>
+    </aside>
+    <main>
+      <article>
+        <img src="images/welsh01rm.png"  alt="아바타">
+        <div>
+          <name>사용자</name>
+          <p>환영합니다! 채팅을 시작해보세요.</p>
+        </div>
+      </article>
+  
+      <div id="chat-messages">
+        <!-- 여기에 채팅 메시지가 동적으로 추가될 것입니다 -->
+      </div>
+  
+      <div class="chat-input">
+        <input type="text" id="message-input" placeholder="메시지를 입력하세요">
+        <button id="send-button">전송</button>
+      </div>
+    </main>
+  
+    <footer>
+      <p>자유게시판</p>
+    </footer>
+  
+    <script>
+      // 전송 버튼 클릭 시 메시지를 서버로 전송하는 함수
+      function sendMessage() {
+        var messageInput = document.getElementById("message-input");
+        var message = messageInput.value;
+  
+        if (message !== "") {
+          // XMLHttpRequest 객체를 사용하여 PHP 파일에 POST 요청 전송
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+              // 채팅 메시지를 전송한 후 새로운 메시지를 가져와서 화면에 추가
+              updateChat();
+            }
+          };
+          xhttp.open("POST", "php/chat.php", true);
+          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhttp.send("message=" + message);
+  
+          // 입력 필드 초기화
+          messageInput.value = "";
+        }
+      }
+  
+      // 채팅 메시지를 가져와서 화면에 업데이트하는 함수
+      function updateChat() {
+        var chatMessages = document.getElementById("chat-messages");
+  
+        // XMLHttpRequest 객체를 사용하여 PHP 파일에 GET 요청 전송
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState === 4 && this.status === 200) {
+            // 새로운 채팅 메시지를 가져와서 chat-messages 요소에 추가
+            chatMessages.innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("GET", "php/get_messages.php", true);
+        xhttp.send();
+      }
+  
+      // 전송 버튼 클릭 시 sendMessage 함수 호출
+      var sendButton = document.getElementById("send-button");
+      sendButton.addEventListener("click", sendMessage);
+  
+      // 1초마다 채팅 메시지 업데이트
+      setInterval(updateChat, 1000);
+    </script>
+    </script>
+    <script type="text/javascript">
+      const toggleMenu = () => document.body.classList.toggle("open");
+    </script>
+  </body>
+  <script>
+    function gotoLOGOUT(){
+      window.location.href = "StartHome.html";
+    }
+  </script>
+</html>
